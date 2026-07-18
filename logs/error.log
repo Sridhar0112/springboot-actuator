@@ -1,0 +1,2 @@
+{"timestamp":"2026-07-18T18:13:44.2464774+05:30","level":"WARN","class":"org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration","message":"spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning"}
+{"timestamp":"2026-07-18T19:35:24.7343713+05:30","level":"WARN","class":"com.zaxxer.hikari.pool.HikariPool","message":"HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=40m13s956ms475µs300ns)."}

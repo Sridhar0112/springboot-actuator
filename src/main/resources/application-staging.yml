@@ -1,0 +1,39 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: student-management-system-staging
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  datasource:
+    url: jdbc:postgresql://<STAGE_DB_HOST>:5432/student_management_stage
+    driver-class-name: org.postgresql.Driver
+    username: ${STAGE_DB_USERNAME}
+    password: ${STAGE_DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          time_zone: UTC
+
+logging:
+  level:
+    root: WARN
+    com.sridhar.springboot: INFO

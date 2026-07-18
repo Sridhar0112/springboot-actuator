@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: student-management-system
+
+  profiles:
+    active: dev
