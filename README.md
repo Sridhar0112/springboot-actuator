@@ -1,55 +1,46 @@
+# Student Management System
 
-<div align="center">
+Spring Boot Actuator · Observability Edition
 
-# 📊 Student Management System
-### Spring Boot Actuator · Observability Edition
+A Spring Boot application for managing student records, built with production-ready observability using Spring Boot Actuator, Micrometer, and Prometheus.
 
-![Java](https://img.shields.io/badge/Java-17-007396?style=flat-square&logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-6DB33F?style=flat-square&logo=springboot&logoColor=white)
-![Maven](https://img.shields.io/badge/Build-Maven-C71A36?style=flat-square&logo=apachemaven&logoColor=white)
-![Prometheus](https://img.shields.io/badge/Metrics-Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white)
-![License](https://img.shields.io/badge/License-Unspecified-lightgrey?style=flat-square)
-
-</div>
-
-A Spring Boot application designed for managing student records, enhanced with production-ready observability features using Spring Boot Actuator, Micrometer, and Prometheus metrics.
+**Stack:** Java 17 · Spring Boot 3.5.3 · Maven
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
-- [🚀 Features](#-features)
-- [🧱 Tech Stack](#-tech-stack)
-- [⚙️ Configuration](#-configuration)
-- [📈 Observability](#-observability)
-- [🏗️ Build Metadata](#-build-metadata)
-- [Prerequisites](#-prerequisites)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Project Structure](#-project-structure)
-- [API Reference](#-api-reference)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Author](#-author)
-
----
-
-## 🚀 Key Features
-
-- **Student Management:** CRUD operations for student records including name, course, email, and phone number.
-- **Production-Ready Observability:** Leverages Spring Boot Actuator for health checks, metrics, and info endpoints.
-- **Micrometer & Prometheus Integration:** Exposes metrics in Prometheus format for external monitoring.
-- **Custom Health Indicators:** Includes health checks for the email service and student service.
-- **Profile-Aware Configuration:** Supports different configurations for development, QA, staging, and production environments.
-- **Data Persistence:** Utilizes Spring Data JPA with Flyway for database migrations (supports H2 and PostgreSQL).
-- **Robust Logging:** Implements structured logging with Logstash Logback Encoder and includes request/response logging with MDC support.
-- **Input Validation:** Enforces data integrity through Bean Validation and custom validation rules.
-- **Email Notifications:** Sends email notifications upon successful student creation (mocked in dev/qa, real in prod/staging).
-- **Build Metadata:** Integrates `spring-boot-maven-plugin` and `git-commit-id-maven-plugin` to expose build information.
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Configuration](#configuration)
+- [Observability](#observability)
+- [Build Metadata](#build-metadata)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [API Reference](#api-reference)
+- [Contributing](#contributing)
+- [Author](#author)
 
 ---
 
-## 🧱 Tech Stack
+## Features
+
+- **Student Management** — CRUD operations for student records (name, course, email, phone).
+- **Production-Ready Observability** — Spring Boot Actuator for health checks, metrics, and info endpoints.
+- **Micrometer & Prometheus Integration** — Application metrics exposed in Prometheus scrape format.
+- **Custom Health Indicators** — Dedicated health checks for the email service and student service.
+- **Profile-Aware Configuration** — Separate configs for dev, QA, staging, and production.
+- **Data Persistence** — Spring Data JPA with Flyway migrations, supporting H2 and PostgreSQL.
+- **Structured Logging** — Logstash Logback Encoder with request/response logging and MDC support.
+- **Input Validation** — Bean Validation plus custom validation rules.
+- **Email Notifications** — Sent on successful student creation (mocked in dev/QA, real in staging/prod).
+- **Build Metadata** — `spring-boot-maven-plugin` and `git-commit-id-maven-plugin` expose build/version info.
+
+---
+
+## Tech Stack
 
 | Layer | Technology | Details |
 |---|---|---|
@@ -57,26 +48,28 @@ A Spring Boot application designed for managing student records, enhanced with p
 | Framework | Spring Boot | 3.5.3 |
 | Web | Spring Web | `spring-boot-starter-web` |
 | Persistence | Spring Data JPA | `spring-boot-starter-data-jpa` |
-| Database | H2 | `runtime/dev` |
-| Database | PostgreSQL | `runtime` |
+| Database | H2 | dev/runtime |
+| Database | PostgreSQL | runtime |
 | Migrations | Flyway | `flyway-core`, `flyway-database-postgresql` |
 | Observability | Spring Boot Actuator | `spring-boot-starter-actuator` |
 | Metrics | Micrometer | `micrometer-registry-prometheus` |
 | Logging | Logback + Logstash | `logstash-logback-encoder` (structured JSON) |
 | Mail | Spring Mail | `spring-boot-starter-mail` |
-| Validation | Bean Validation | `spring-boot-starter-validation`, custom validators |
+| Validation | Bean Validation | `spring-boot-starter-validation` + custom validators |
 | AOP | Spring AOP | `spring-boot-starter-aop` |
-| Environment Config | `spring-dotenv` | `.env` file support |
+| Environment Config | spring-dotenv | `.env` file support |
 | Build Metadata | Maven Plugins | `spring-boot-maven-plugin`, `git-commit-id-maven-plugin` |
-| Utilities | Lombok | Data, Slf4j, etc. |
+| Utilities | Lombok | `@Data`, `@Slf4j`, etc. |
 | Testing | Spring Boot Test | `spring-boot-starter-test` |
 | Build Tool | Maven | Wrapper included (`./mvnw`) |
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
-Environment variables for sensitive configurations (like database credentials, mail server details) are managed via `spring-dotenv`. Create a `.env` file in the root directory. **Do not commit this file to your repository.**
+Sensitive configuration (database credentials, mail server details) is managed via `spring-dotenv`. Create a `.env` file in the project root.
+
+**⚠️ Do not commit `.env` to your repository.**
 
 ```env
 DB_HOST=
@@ -90,15 +83,13 @@ MAIL_PASSWORD=
 SPRING_PROFILES_ACTIVE=
 ```
 
-Profile-specific configurations are defined in `src/main/resources/application-{profile}.yml` (e.g., `application-dev.yml`, `application-prod.yml`).
+Profile-specific settings live in `src/main/resources/application-{profile}.yml` (e.g. `application-dev.yml`, `application-prod.yml`).
 
 ---
 
-## 📈 Observability
+## Observability
 
-The application exposes actuator endpoints under the `/actuator` path.
-
-Base management URL:
+Actuator endpoints are exposed under `/actuator`:
 
 ```
 http://localhost:8080/actuator
@@ -106,154 +97,130 @@ http://localhost:8080/actuator
 
 | Endpoint | Purpose |
 |---|---|
-| `/actuator/health` | Displays the overall health of the application, including custom health indicators for the email and student services. |
-| `/actuator/info` | Shows build information, including version and git commit details. |
-| `/actuator/metrics` | Lists available metrics that can be scraped and provides details on specific metrics. |
-| `/actuator/prometheus` | Exposes application metrics in a format scrapeable by Prometheus. |
+| `/actuator/health` | Overall application health, including custom indicators for the email and student services |
+| `/actuator/info` | Build information, including version and Git commit details |
+| `/actuator/metrics` | Available metrics and details on specific ones |
+| `/actuator/prometheus` | Metrics in a format scrapeable by Prometheus |
 
-*Note: The exact set of exposed endpoints can be configured via `management.endpoints.web.exposure.include` in your `application.yml` or environment properties.*
-
----
-
-## 🏗️ Build Metadata
-
-Integration with the `spring-boot-maven-plugin` (`build-info` goal) and `git-commit-id-maven-plugin` ensures that detailed build and Git commit information is captured. This information is made available through the `/actuator/info` endpoint, providing valuable context for deployed applications.
+> The exact set of exposed endpoints is configurable via `management.endpoints.web.exposure.include`.
 
 ---
 
-## 🧰 Prerequisites
+## Build Metadata
 
-- **Java Development Kit (JDK):** Version 17 or higher.
-- **Apache Maven:** Version 3.x (or use the included `./mvnw` Maven wrapper).
-- **Database:** A PostgreSQL instance is required if you are running the application with profiles other than the default H2 setup (e.g., `prod`, `staging`).
+`spring-boot-maven-plugin` (`build-info` goal) and `git-commit-id-maven-plugin` capture build and Git commit information, surfaced through `/actuator/info` — useful context for deployed instances.
 
 ---
 
-## 📦 Installation
+## Prerequisites
 
-1.  **Clone the Repository:**
-    ```bash
-    git clone https://github.com/Sridhar0112/springboot-actuator.git
-    cd springboot-actuator
-    ```
-
-2.  **Configure Environment Variables:**
-    Create a `.env` file in the root of the project and add your database and mail server credentials:
-    ```env
-    DB_HOST=your_db_host
-    DB_PORT=your_db_port
-    DB_NAME=your_db_name
-    DB_USERNAME=your_db_username
-    DB_PASSWORD=your_db_password
-    SERVER_PORT=8080
-    MAIL_USERNAME=your_email@example.com
-    MAIL_PASSWORD=your_email_password
-    ```
-    *Note: For local development, you can rely on the default H2 database configuration by not providing database credentials in the `.env` file.* 
+- **JDK** 17 or higher
+- **Apache Maven** 3.x (or use the included `./mvnw` wrapper)
+- **PostgreSQL** — required for profiles other than the default H2 setup (e.g. `prod`, `staging`)
 
 ---
 
-## ▶️ Usage
+## Installation
 
-This application serves as a robust backend for managing student data, with a strong emphasis on production monitoring and observability.
+**1. Clone the repository**
 
-### Running the Application
+```bash
+git clone https://github.com/Sridhar0112/springboot-actuator.git
+cd springboot-actuator
+```
 
-Use the Maven wrapper to run the application:
+**2. Configure environment variables**
+
+Create a `.env` file in the project root:
+
+```env
+DB_HOST=your_db_host
+DB_PORT=your_db_port
+DB_NAME=your_db_name
+DB_USERNAME=your_db_username
+DB_PASSWORD=your_db_password
+SERVER_PORT=8080
+MAIL_USERNAME=your_email@example.com
+MAIL_PASSWORD=your_email_password
+```
+
+> For local development you can skip database credentials entirely and rely on the default H2 setup.
+
+---
+
+## Usage
+
+**Run the application:**
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-To run with a specific profile (e.g., `dev`, `qa`, `staging`, `prod`), use the following command:
+**Run with a specific profile** (`dev`, `qa`, `staging`, `prod`):
 
 ```bash
 ./mvnw spring-boot:run -Dspring.profiles.active=<profile-name>
 ```
 
-Replace `<profile-name>` with the desired profile (e.g., `dev`, `qa`, `staging`, `prod`).
-
 ### Example Use Cases
 
-- **Student Information System:** A core backend for managing student records in educational institutions.
-- **Observability Demonstration:** A practical example of integrating Spring Boot Actuator with Prometheus for monitoring application health and performance.
-- **Microservice Backend:** Can serve as a microservice for managing student-related data within a larger distributed system.
+- **Student Information System** — core backend for managing student records in educational institutions
+- **Observability Demonstration** — practical example of Spring Boot Actuator + Prometheus monitoring
+- **Microservice Backend** — student-data microservice within a larger distributed system
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 springboot-actuator/
-├── .mvn/
-│   └── wrapper/
-│       └── maven-wrapper.properties
+├── .mvn/wrapper/maven-wrapper.properties
 ├── logs/
-├── mvnw
-├── mvnw.cmd
+├── mvnw, mvnw.cmd
 ├── pom.xml
-├── .env  (create this file for configuration)
+├── .env                     # create this file for configuration
 ├── src/
 │   ├── main/
-│   │   ├── java/
-│   │   │   └── com/sridhar/springboot/
-│   │   │       ├── Config/
-│   │   │       ├── Controller/
-│   │   │       ├── Dto/
-│   │   │       ├── Exception/
-│   │   │       ├── health/
-│   │   │       │   └── service/
-│   │   │       ├── logging/
-│   │   │       │   ├── aspect/
-│   │   │       │   ├── config/
-│   │   │       │   ├── constants/
-│   │   │       │   ├── filter/
-│   │   │       │   ├── interceptor/
-│   │   │       │   ├── mdc/
-│   │   │       │   └── util/
-│   │   │       ├── models/
-│   │   │       ├── Service/
-│   │   │       │   └── notification/
-│   │   │       └── SpringbootApplication.java
+│   │   ├── java/com/sridhar/springboot/
+│   │   │   ├── Config/
+│   │   │   ├── Controller/
+│   │   │   ├── Dto/
+│   │   │   ├── Exception/
+│   │   │   ├── health/service/
+│   │   │   ├── logging/
+│   │   │   │   ├── aspect/ config/ constants/
+│   │   │   │   ├── filter/ interceptor/
+│   │   │   │   └── mdc/ util/
+│   │   │   ├── models/
+│   │   │   ├── Service/notification/
+│   │   │   └── SpringbootApplication.java
 │   │   ├── resources/
-│   │   │   ├── application-dev.yml
-│   │   │   ├── application-prod.yml
-│   │   │   ├── application-qa.yml
-│   │   │   ├── application-staging.yml
-│   │   │   ├── application-uat.yml
 │   │   │   ├── application.yml
-│   │   │   ├── db/
-│   │   │   │   └── migration/
-│   │   │   │       └── V1__create_student_table.sql
+│   │   │   ├── application-{dev,qa,staging,uat,prod}.yml
+│   │   │   ├── db/migration/V1__create_student_table.sql
 │   │   │   └── logback-spring.xml
 │   │   └── webapp/
-│   └── test/
-│       └── java/com/sridhar/springboot/
-│           └── SpringbootApplicationTests.java
+│   └── test/java/com/sridhar/springboot/SpringbootApplicationTests.java
 └── README.md
 ```
 
 ---
 
-## 🌐 API Reference
-
-This section details the available API endpoints for interacting with the student management system.
+## API Reference
 
 Base URL: `http://localhost:8080/api/v1/students`
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `POST` | `/add` | Adds a new student to the system. |
-| `GET` | `/getstudent` | Retrieves a list of all students. |
-| `GET` | `/getstudent/{id}` | Retrieves a specific student by their ID. |
-| `DELETE` | `/delete/{id}` | Deletes a student by their ID. |
-| `PUT` | `/update/{id}` | Updates an existing student's information by their ID. |
+| `POST` | `/add` | Add a new student |
+| `GET` | `/getstudent` | List all students |
+| `GET` | `/getstudent/{id}` | Get a student by ID |
+| `PUT` | `/update/{id}` | Update a student by ID |
+| `DELETE` | `/delete/{id}` | Delete a student by ID |
 
-### Request/Response Examples
+### Add Student — `POST /add`
 
-**Add Student (POST `/add`)**
-
-**Request Body:**
+**Request:**
 ```json
 {
   "name": "Jane Doe",
@@ -263,7 +230,7 @@ Base URL: `http://localhost:8080/api/v1/students`
 }
 ```
 
-**Success Response (201 Created):**
+**Response — 201 Created:**
 ```json
 {
   "message": "Student added successfully",
@@ -271,7 +238,7 @@ Base URL: `http://localhost:8080/api/v1/students`
 }
 ```
 
-**Error Response (400 Bad Request - Validation Error):**
+**Response — 400 Bad Request (validation error):**
 ```json
 {
   "timestamp": "2023-10-27T10:00:00.000+00:00",
@@ -284,11 +251,9 @@ Base URL: `http://localhost:8080/api/v1/students`
 }
 ```
 
-**Get Student by ID (GET `/getstudent/{id}`)
-**
-**Path Parameter:** `id` (e.g., `1`)
+### Get Student by ID — `GET /getstudent/{id}`
 
-**Success Response (200 OK):**
+**Response — 200 OK:**
 ```json
 {
   "Student": {
@@ -305,32 +270,24 @@ Base URL: `http://localhost:8080/api/v1/students`
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome! If you have suggestions for improving this project, please:
+Contributions are welcome:
 
-1.  **Fork the repository.**
-2.  **Create a new branch** (`git checkout -b feature/your-feature-name`).
-3.  **Make your changes** and commit them (`git commit -m 'Add some feature'`).
-4.  **Push to the branch** (`git push origin feature/your-feature-name`).
-5.  **Open a Pull Request.**
+1. Fork the repository
+2. Create a branch — `git checkout -b feature/your-feature-name`
+3. Commit your changes — `git commit -m 'Add some feature'`
+4. Push the branch — `git push origin feature/your-feature-name`
+5. Open a Pull Request
 
-Please ensure your code adheres to the project's coding standards and includes appropriate tests.
-
----
-
-## 📄 License
-
-This project is not currently specified with a license. Please refer to the repository owner for licensing details.
+Please follow the project's coding standards and include tests where relevant.
 
 ---
 
-## 👤 Author
+## Author
 
-**Sridhar** — [GitHub Profile](https://github.com/Sridhar0112)
+**Sridhar** — [GitHub](https://github.com/Sridhar0112)
 
-<div align="center">
+---
 
-⭐ **Star this repo** if it helped you learn Spring Boot observability!
-
-</div>
+⭐ If this project helped you learn Spring Boot observability, consider starring the repo.
