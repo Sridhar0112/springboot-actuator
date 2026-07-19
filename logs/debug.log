@@ -22,3 +22,31 @@
 {"timestamp":"2026-07-18T15:43:28.3946596+05:30","level":"DEBUG","context":{"requestId":"f7a34a59-b154-4f98-b6ac-3dc19018bc11","service":"student-service"},"class":"com.sridhar.springboot.Controller.StudentController","message":"Incoming student request StudentDto.StudentRequest(ID=null, name=Arun Kumar AK, course=java, email=Arunkumar7537@gmail.com, phone=9087654390)"}
 {"timestamp":"2026-07-18T18:13:35.1021369+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
 {"timestamp":"2026-07-18T18:13:38.9135129+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-18T19:52:41.5954154+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-18T19:52:45.2217309+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-18T20:57:06.3258116+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-18T20:57:13.1269313+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-18T22:50:10.0494195+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-18T22:50:16.2658626+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-19T00:03:38.9738986+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-19T00:03:45.3414501+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-19T10:41:59.7472943+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-19T10:42:04.649014+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-19T11:47:54.589953+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-19T11:47:58.9779998+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-19T12:31:11.252475+05:30","level":"DEBUG","context":{"requestId":"7fa109ea-dabc-475d-83ea-b1d9d23b7401","service":"student-service"},"class":"com.sridhar.springboot.Controller.StudentController","message":"Incoming student request StudentDto.StudentRequest(ID=null, name=Arun Kumar AK, course=java, email=Arunkumar7537@gmail.com, phone=9087654390)"}
+{"timestamp":"2026-07-19T12:40:01.1912543+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-19T12:40:08.3832379+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-19T18:24:24.8590734+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-19T18:24:35.3981391+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-19T18:25:05.9102478+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-19T18:25:11.2006433+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-19T18:27:26.1630956+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-19T18:27:30.5050582+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-19T19:12:47.3623663+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-19T19:12:54.6889117+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-19T19:21:00.1490504+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-19T19:21:06.9586959+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-19T19:25:09.4586399+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplicationTests","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-19T19:25:49.6864365+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-19T19:25:58.1387592+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}

@@ -24,3 +24,18 @@ logging:
   level:
     root: INFO
     com.sridhar.springboot: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - metrics
+          - prometheus
+          - loggers
+
+  endpoint:
+    health:
+      show-details: always

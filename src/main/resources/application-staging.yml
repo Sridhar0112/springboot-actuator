@@ -1,9 +1,13 @@
 server:
   port: 8083
 
+
 spring:
   application:
     name: student-management-system-staging
+  flyway:
+    baseline-on-migrate: true
+
   mail:
     host: smtp.gmail.com
     port: 587
@@ -17,11 +21,13 @@ spring:
           starttls:
             enable: true
 
+
   datasource:
-    url: jdbc:postgresql://<STAGE_DB_HOST>:5432/student_management_stage
+    url: jdbc:postgresql://${STAGE_DB_HOST}:5432/student_management_stage
     driver-class-name: org.postgresql.Driver
     username: ${STAGE_DB_USERNAME}
     password: ${STAGE_DB_PASSWORD}
+
 
   jpa:
     hibernate:
@@ -33,7 +39,24 @@ spring:
         jdbc:
           time_zone: UTC
 
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - metrics
+          - prometheus
+
+  endpoint:
+    health:
+      show-details: when-authorized
+
+
 logging:
   level:
     root: WARN
     com.sridhar.springboot: INFO
+
