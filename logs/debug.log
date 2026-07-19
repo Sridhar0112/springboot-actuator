@@ -50,3 +50,8 @@
 {"timestamp":"2026-07-19T19:25:09.4586399+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplicationTests","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
 {"timestamp":"2026-07-19T19:25:49.6864365+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
 {"timestamp":"2026-07-19T19:25:58.1387592+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-19T19:33:59.7963723+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-19T19:34:04.9297535+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
+{"timestamp":"2026-07-19T19:38:21.2076294+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplicationTests","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-19T19:38:48.7115543+05:30","level":"DEBUG","class":"com.sridhar.springboot.SpringbootApplication","message":"Running with Spring Boot v3.5.3, Spring v6.2.8"}
+{"timestamp":"2026-07-19T19:38:53.2058519+05:30","level":"DEBUG","class":"com.sridhar.springboot.logging.filter.RequestLoggingFilter","message":"Filter 'requestLoggingFilter' configured for use"}
