@@ -1,183 +1,140 @@
-# **Spring-boot Logging Design Document**
+<div align="center">
 
-**Project**: Spring Boot Student Management System  
-**Epic**: Enterprise Logging Enhancement  
-**Version**: 1.0  
-**Date**: July 2026
+# 📊 Student Management System
+### Spring Boot Actuator · Observability Edition
 
----
+![Java](https://img.shields.io/badge/Java-17-007396?style=flat-square&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-6DB33F?style=flat-square&logo=springboot&logoColor=white)
+![Maven](https://img.shields.io/badge/Build-Maven-C71A36?style=flat-square&logo=apachemaven&logoColor=white)
+![Prometheus](https://img.shields.io/badge/Metrics-Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white)
+![License](https://img.shields.io/badge/License-Unspecified-lightgrey?style=flat-square)
 
-## **Project Overview**
+A Spring Boot application for student management, instrumented for production observability with Actuator, Micrometer, and Prometheus.
 
-This document outlines the complete design for transforming the existing Student CRUD application into a professional **Enterprise Spring Boot Logging Showcase**. The enhancement adds comprehensive, production-grade logging while preserving the clean architecture of the original project.
-
-The focus is on observability, traceability, maintainability, and real-world production readiness.
-
----
-
-## **Epic Description**
-
-Implement a full-featured, enterprise-grade logging system that provides complete visibility into application behavior across all layers, enabling efficient debugging, monitoring, auditing, and support in development and production environments.
+</div>
 
 ---
 
-## **Business Value**
+## 📑 Table of Contents
 
-- Faster troubleshooting and root cause analysis
-- Better auditability of business operations
-- Production monitoring and alerting readiness
-- Demonstrable best practices for enterprise Spring Boot applications
-- Foundation for future scalability (microservices, distributed tracing)
-
----
-
-## **Logging Features**
-
-- Centralized logging configuration
-- HTTP request and response logging
-- Layered application logging (Controller, Service, Repository)
-- Global exception logging
-- Structured JSON logging
-- Request correlation and traceability
-- Environment-aware logging (dev/test/prod)
-- Performance and audit logging
+- [Tech Stack](#-tech-stack)
+- [Getting Started](#-getting-started)
+- [Configuration](#-configuration)
+- [Observability](#-observability)
+- [Build Metadata](#-build-metadata)
+- [License](#-license)
+- [Author](#-author)
 
 ---
 
-## **Application Layer Logging Strategy**
+## 🧱 Tech Stack
 
-- **Cross-cutting Layer** (Filter/Interceptor): Handles all HTTP traffic and correlation ID management.
-- **Controller Layer**: API boundary and high-level operation logging.
-- **Service Layer**: Business logic flow, decisions, and timing.
-- **Repository Layer**: Data access operations and performance.
-- **Exception Handler**: Centralized error logging and context enrichment.
-- **Startup Layer**: Application initialization and configuration logging.
-
----
-
-## **Endpoint-wise Logging Plan**
-
-All endpoints will follow consistent logging:
-
-- **POST /student/add**: Request body summary, creation result, timing.
-- **GET /student/getstudent**: List operation details, record count, timing.
-- **GET /student/getstudent/{id}**: Single record retrieval, not-found cases, timing.
-
-Every request will generate logs at entry, key processing points, and exit.
-
----
-
-## **Enterprise Logging Architecture**
-
-The architecture introduces a dedicated `logging` package for cross-cutting concerns, keeping business logic clean. It uses:
-- SLF4J abstraction
-- Logback as implementation
-- MDC for context propagation
-- Structured JSON output for production
-- Profile-based configuration
-
-This creates a modular, extensible logging platform.
+| Layer | Technology |
+|---|---|
+| Language | Java 17 |
+| Framework | Spring Boot 3.5.3 |
+| Web | `spring-boot-starter-web` |
+| Persistence | `spring-boot-starter-data-jpa` |
+| Database | H2 (runtime/dev) · PostgreSQL (runtime) |
+| Migrations | Flyway (`flyway-core`, `flyway-database-postgresql`) |
+| Observability | Actuator + Micrometer + Prometheus registry |
+| Logging | Logstash Logback Encoder (structured JSON) |
+| Mail | `spring-boot-starter-mail` |
+| Validation | `spring-boot-starter-validation` |
+| AOP | `spring-boot-starter-aop` |
+| Env Config | `spring-dotenv` |
+| Build Metadata | `spring-boot-maven-plugin` (build-info) + `git-commit-id-maven-plugin` |
+| Utilities | Lombok |
+| Testing | `spring-boot-starter-test` |
+| Build Tool | Maven (wrapper included) |
 
 ---
 
-## **Request Lifecycle Flow**
+## 🚀 Getting Started
 
-```
-Client Request
-    ↓
-[HTTP Logging Filter] → Assign correlationId + Log Request
-    ↓
-Controller → Log Entry
-    ↓
-Service → Log Business Operation
-    ↓
-Repository → Log Data Access
-    ↓
-Database
-    ↑ (Response)
-Repository → Service → Controller
-    ↓
-[HTTP Logging Filter] → Log Response + Clear MDC
-    ↓
-Client Response
+### Prerequisites
+- Java 17+
+- Maven (or use the included `./mvnw` wrapper)
+- PostgreSQL instance if running a non-H2 profile
+
+### Clone
+
+```bash
+git clone https://github.com/Sridhar0112/springboot-actuator.git
+cd springboot-actuator
 ```
 
-Exceptions at any layer are captured by the Global Exception Handler with full context and correlation ID.
+### Run
+
+```bash
+./mvnw spring-boot:run
+```
+
+Run with a specific profile:
+
+```bash
+./mvnw spring-boot:run -Dspring.profiles.active=<profile-name>
+```
+
+> Replace `<profile-name>` with a profile actually defined under `src/main/resources`.
 
 ---
 
-## **Component Responsibilities**
+## ⚙️ Configuration
 
-- **HTTP Filter/Interceptor**: Request/response capture and correlation ID lifecycle.
-- **MDC Service**: Context propagation across layers.
-- **Controller Logger**: API boundary events.
-- **Service Logger**: Business rules and orchestration.
-- **Repository Logger**: Data operations.
-- **Global Exception Handler**: Error logging and response enrichment.
-- **Logging Configuration**: Environment-specific behavior.
-- **Utilities**: Common formatting and sanitization.
+Environment variables are loaded via `spring-dotenv` from a local `.env` file (do **not** commit this file):
 
----
-
-## **Log Level Strategy**
-
-- **INFO**: High-level operations, request summaries, successful completions (default for production).
-- **DEBUG**: Detailed flow, inputs/outputs, troubleshooting.
-- **WARN**: Performance warnings, non-critical issues.
-- **ERROR**: All exceptions, failures, and critical issues.
+```env
+DB_HOST=
+DB_PORT=
+DB_NAME=
+DB_USERNAME=
+DB_PASSWORD=
+SERVER_PORT=
+MAIL_USERNAME=
+MAIL_PASSWORD=
+SPRING_PROFILES_ACTIVE=
+```
 
 ---
 
-## **Production Logging Standards**
+## 📈 Observability
 
-- Structured JSON format
-- Correlation ID on every log line
-- Async appenders where applicable
-- Log rotation and size management
-- Externalized configuration
-- Integration-ready for centralized logging platforms (ELK, Loki, etc.)
+Base management URL:
 
----
+```
+http://localhost:8080/actuator
+```
 
-## **Security & Performance Considerations**
+| Endpoint | Purpose |
+|---|---|
+| `/actuator/health` | Application health |
+| `/actuator/info` | Build & git metadata |
+| `/actuator/metrics` | Available metrics |
+| `/actuator/prometheus` | Prometheus scrape endpoint |
 
-- **Avoid**: Full payloads in production, sensitive data, excessive debug logging.
-- **Implement**: Data masking, log level controls, performance timing without overhead.
-- Ensure logging does not impact core application performance or expose security risks.
-
----
-
-## **Scalability Approach**
-
-The design supports growth by:
-- Using a reusable logging module
-- Standard correlation ID propagation via headers
-- Consistent structured format across services
-- Easy integration with distributed tracing tools
-- Minimal changes required when adding new modules or microservices
+> Exact exposed endpoints depend on `management.endpoints.web.exposure.include` in `application.yml`.
 
 ---
 
-## **Implementation Blueprint**
+## 🏗️ Build Metadata
 
-- Create dedicated `logging` package with filters, utilities, and config.
-- Implement layered logging responsibilities.
-- Configure `logback-spring.xml` with profiles.
-- Ensure all Student CRUD operations are fully traced.
-- Follow the defined success and failure logging flows.
+`build-info` (Spring Boot Maven plugin) and `git-commit-id-maven-plugin` are configured, so `/actuator/info` surfaces build version and commit details after a build.
 
 ---
 
-## **Production Readiness Checklist**
+## 📄 License
 
-- [ ] Structured JSON logging enabled
-- [ ] Correlation ID implemented across all layers
-- [ ] Sensitive data protection in place
-- [ ] Environment-specific configurations
-- [ ] Performance timing and slow operation detection
-- [ ] Log rotation and management configured
-- [ ] Error scenarios fully covered
-- [ ] Documentation and README updated
-- [ ] Ready for centralized log aggregation
+Not currently specified in the repository.
 
 ---
+
+## 👤 Author
+
+**Sridhar** — [GitHub Profile](https://github.com/Sridhar0112)
+
+<div align="center">
+
+⭐ **Star this repo** if it helped you learn Spring Boot observability!
+
+</div>
